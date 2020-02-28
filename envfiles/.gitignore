@@ -1,2 +1,2 @@
 # 環境変数フォルダのためにGit管理を無視
-envfiles/*.env
+envfiles/
