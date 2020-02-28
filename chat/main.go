@@ -45,8 +45,8 @@ func main() {
 	flag.Parse() // フラグを解釈する．
 
 	// 環境変数のインポート
-	err := godotenv.Load(fmt.Sprintf("envfiles/%s.env", os.Getenv("GO_ENV")))
-	if err != nil {
+	err := godotenv.Load(fmt.Sprintf("envfiles/develop.env"))
+	if err == nil {
 		log.Fatal("Error Loading .env file")
 	}
 	facebook_id := os.Getenv("FACEBOOK_CLIENT_ID")
