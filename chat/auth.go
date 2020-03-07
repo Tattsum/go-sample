@@ -9,9 +9,9 @@ import (
 	"strings"
 
 	"github.com/stretchr/gomniauth"
+	gomniauthcommon "github.com/stretchr/gomniauth/common"
 	"github.com/stretchr/objx"
 )
-import gomniauthcommon "github.com/stretchr/gomniauth/common"
 
 type ChatUser interface {
 	UniqueID() string
