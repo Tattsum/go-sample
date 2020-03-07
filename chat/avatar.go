@@ -16,9 +16,20 @@ type Avatar interface {
 	GetAvatarURL(ChatUser) (string, error)
 }
 
+type TryAvatars []Avatar
+
 type AuthAvatar struct{}
 
 var UseAuthAvatar AuthAvatar
+
+func (a TryAvatars) GetAvatarURL(u ChatUser) (string, error) {
+	for _, avatar := range a {
+		if url, err := avatar.GetAvatarURL(u); err == nil {
+			return url, nil
+		}
+	}
+	return "", ErrNoAvatarURL
+}
 
 func (_ AuthAvatar) GetAvatarURL(u ChatUser) (string, error) {
 	url := u.AvatarURL()
