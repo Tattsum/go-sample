@@ -82,6 +82,7 @@ func main() {
 		w.Header()["Location"] = []string{"/chat"}
 		w.WriteHeader(http.StatusTemporaryRedirect)
 	})
+	http.HandleFunc("/uploader", uploaderHandler)
 
 	// チャットルームを開始します．
 	go r.run()
