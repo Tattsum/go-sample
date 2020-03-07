@@ -5,12 +5,14 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+
+	gomniauthtest "github.com/stretchr/gomniauth/test"
 )
 
 func TestAuthAvatar(t *testing.T) {
 	var authAvatar AuthAvatar
 	testUser := &gomniauthtest.TestUser{}
-	testUser.on("AvatarURL").Return("", ErrNoAvatarURL)
+	testUser.On("AvatarURL").Return("", ErrNoAvatarURL)
 	testChatUser := &chatUser{User: testUser}
 	url, err := authAvatar.GetAvatarURL(testChatUser)
 	if err != ErrNoAvatarURL {
@@ -20,7 +22,7 @@ func TestAuthAvatar(t *testing.T) {
 	testUrl := "http://url-to-avatar/"
 	testUser = &gomniauthtest.TestUser{}
 	testChatUser.User = testUser
-	testUser.on("AvatarURL").Return(testUrl, nil)
+	testUser.On("AvatarURL").Return(testUrl, nil)
 	url, err = authAvatar.GetAvatarURL(testChatUser)
 	if err != nil {
 		t.Error("値が存在しない場合，AuthAvatar.GetAvatarURLは" + "ErrNoAvatarURLを返すべきです．")
