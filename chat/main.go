@@ -19,6 +19,9 @@ import (
 	"github.com/tattsum/go-sample/trace"
 )
 
+// 現在アクティブなAvatarの実装
+var avatars Avatar = UseFileSystemAvatar
+
 type templateHandler struct {
 	once     sync.Once
 	filename string
