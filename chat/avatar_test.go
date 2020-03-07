@@ -33,15 +33,12 @@ func TestAuthAvatar(t *testing.T) {
 
 func TestGravatarAvatar(t *testing.T) {
 	var gravatarAvatar GravatarAvatar
-	client := new(client)
-	client.userData = map[string]interface{}{
-		"userid": "0bc83cb571cd1c50ba6f3e8a78ef1346",
-	}
-	url, err := gravatarAvatar.GetAvatarURL(client)
+	user := &chatUser{uniqueID: "abc"}
+	url, err := gravatarAvatar.GetAvatarURL(user)
 	if err != nil {
 		t.Error("GravatarAvatar.GetAvatarURLはエラーを返すべきではありません")
 	}
-	if url != "//www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346" {
+	if url != "//www.gravatar.com/avatar/abc" {
 		t.Errorf("GravatarAvatar.GetAvatarURLが%sという誤った値を返しました", url)
 	}
 }
@@ -53,9 +50,8 @@ func TestFileSystemAvatar(t *testing.T) {
 	defer func() { os.Remove(filename) }()
 
 	var fileSystemAvatar FileSystemAvatar
-	client := new(client)
-	client.userData = map[string]interface{}{"userid": "abc"}
-	url, err := fileSystemAvatar.GetAvatarURL(client)
+	user := &chatUser{uniqueID: "abc"}
+	url, err := fileSystemAvatar.GetAvatarURL(user)
 	if err != nil {
 		t.Error("FileSystemAvatar.GetAvatarURLはエラーを返すべきではありません．")
 	}
